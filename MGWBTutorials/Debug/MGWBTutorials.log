@@ -1,11 +1,21 @@
-﻿Build started 3/14/2016 5:57:27 PM.
-     1>Project "C:\Users\computer\Desktop\MGWBTutorials\MGWBTutorials\MGWBTutorials.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\computer\Desktop\MGWBTutorials\Debug\MGWBTutorials.exe" /INCREMENTAL /NOLOGO opengl32.lib glew32.lib SDL2.lib SDL2main.lib Project42.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\computer\Desktop\MGWBTutorials\Debug\MGWBTutorials.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\computer\Desktop\MGWBTutorials\Debug\MGWBTutorials.lib" /MACHINE:X86 Debug\main.obj
+﻿Build started 3/14/2016 8:40:21 PM.
+     1>Project "C:\Users\computer\Desktop\opengl-engine\MGWBTutorials\MGWBTutorials.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt MainGame.cpp main.cpp
+         MainGame.cpp
+     1>c:\users\computer\desktop\opengl-engine\mgwbtutorials\maingame.cpp(137): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+     1>c:\users\computer\desktop\opengl-engine\mgwbtutorials\maingame.cpp(144): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+     1>c:\users\computer\desktop\opengl-engine\mgwbtutorials\maingame.cpp(172): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
+     1>c:\users\computer\desktop\opengl-engine\mgwbtutorials\maingame.cpp(194): warning C4244: 'argument': conversion from 'float' to 'Uint32', possible loss of data
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         main.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\computer\Desktop\opengl-engine\Debug\MGWBTutorials.exe" /INCREMENTAL /NOLOGO opengl32.lib glew32.lib SDL2.lib SDL2main.lib Project42.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\computer\Desktop\opengl-engine\Debug\MGWBTutorials.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\computer\Desktop\opengl-engine\Debug\MGWBTutorials.lib" /MACHINE:X86 Debug\main.obj
          Debug\MainGame.obj
-         MGWBTutorials.vcxproj -> C:\Users\computer\Desktop\MGWBTutorials\Debug\MGWBTutorials.exe
-     1>Done Building Project "C:\Users\computer\Desktop\MGWBTutorials\MGWBTutorials\MGWBTutorials.vcxproj" (Build target(s)).
+         MGWBTutorials.vcxproj -> C:\Users\computer\Desktop\opengl-engine\Debug\MGWBTutorials.exe
+     1>Done Building Project "C:\Users\computer\Desktop\opengl-engine\MGWBTutorials\MGWBTutorials.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.26
+Time Elapsed 00:00:02.29

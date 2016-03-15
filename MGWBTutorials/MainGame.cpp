@@ -23,14 +23,6 @@ MainGame::~MainGame()
 void MainGame::run()
 {
 	initSystems();
-
-	// push back some sprites
-	_sprites.push_back(new Proj42::Sprite());
-	_sprites.back()->init(0.0f, 0.0f, _screenWidth / 2, _screenWidth / 2, "Textures/roxy.png");
-
-	_sprites.push_back(new Proj42::Sprite());
-	_sprites.back()->init(_screenWidth / 2, 0.0f, _screenWidth / 2, _screenWidth / 2, "Textures/roxy.png");
-
 	gameLoop();
 }
 
@@ -39,6 +31,7 @@ void MainGame::initSystems()
 	Proj42::init();
 	_window.create("Game Engine", _screenWidth, _screenHeight, 0);
 	initShaders();										// initialize shaders
+	_spriteBatch.init();
 }
 
 void MainGame::initShaders()
@@ -75,10 +68,10 @@ void MainGame::processInput()
 				_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, -CAM_SPEED));
 				break;
 			case SDLK_a:
-				_camera.setPosition(_camera.getPosition() + glm::vec2(CAM_SPEED, 0.0f));
+				_camera.setPosition(_camera.getPosition() + glm::vec2(-CAM_SPEED, 0.0f));
 				break;
 			case SDLK_d:
-				_camera.setPosition(_camera.getPosition() + glm::vec2(-CAM_SPEED, 0.0f));
+				_camera.setPosition(_camera.getPosition() + glm::vec2(CAM_SPEED, 0.0f));
 				break;
 			case SDLK_q:
 				_camera.setScale(_camera.getScale() + SCALE_SPEED);
@@ -113,8 +106,24 @@ void MainGame::drawGame()
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &cameraMatrix[0][0]);
 
 	// actually draw stuff!
-	for (int i = 0; i < _sprites.size(); i++)
-		_sprites[i]->draw();
+	_spriteBatch.begin();
+
+	glm::vec4 position(0.0f, 0.0f, 50.0f, 50.0f);
+	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
+	float depth = 0;
+	GLuint texture = Proj42::ResourceManager::getTexture("Textures/vriska.png").id;
+	Proj42::Color color;
+
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	color.a = 255;
+
+	_spriteBatch.draw(position, uv, color, depth, texture);
+
+	_spriteBatch.end();
+
+	_spriteBatch.renderBatch();
 
 	glBindTexture(GL_TEXTURE_2D, 0);						// unbind the texture
 	_colorProgram.unuse();									// unuse program

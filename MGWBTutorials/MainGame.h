@@ -10,6 +10,7 @@
 #include <Project42/GLTexture.h>
 #include <Project42/Window.h>
 #include <Project42/Camera2D.h>
+#include <Project42/SpriteBatch.h>
 
 const float MAX_FPS = 60.0f;
 
@@ -35,11 +36,11 @@ private:
 	int _screenWidth;
 	int _screenHeight;
 	GameState _gameState;
-	std::vector<Proj42::Sprite*> _sprites;
 	Proj42::GLSLProgram _colorProgram;
 	float _time;
 	float _fps;
 	float _frameTime;
 	Proj42::Camera2D _camera;
+	Proj42::SpriteBatch _spriteBatch;
 };
 
