@@ -10,7 +10,6 @@ MainGame::MainGame() :
 	_screenWidth(1024),
 	_screenHeight(768),
 	_gameState(GameState::PLAY),
-	_time(0.0f),
 	_maxFPS(60.0f)
 {
 	_camera.init(_screenWidth, _screenHeight);
@@ -79,10 +78,6 @@ void MainGame::drawGame()
 	GLint textureLocation = _colorProgram.getUniformLocation("mySampler");
 	glUniform1i(textureLocation, 0);
 
-	// send uniform time variable to the glsl program
-	GLint timeLocation = _colorProgram.getUniformLocation("time");
-	glUniform1f(timeLocation, _time);
-
 	// send camera matrix to the glsl program
 	GLint projectionLocation = _colorProgram.getUniformLocation("projection");
 	glm::mat4 cameraMatrix = _camera.getCameraMatrix();
@@ -95,7 +90,7 @@ void MainGame::drawGame()
 	glm::vec4 position(0.0f, 0.0f, 50.0f, 50.0f);
 	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
 	float depth = 0;
-	static GLuint texture = Proj42::ResourceManager::getTexture("Textures/vriska.png").id;
+	static GLuint texture = Proj42::ResourceManager::getTexture("Textures/roxy.png").id;
 	Proj42::Color color;
 
 	color.r = 255;
@@ -120,14 +115,9 @@ void MainGame::gameLoop()
 	{
 		static int frameCounter = 0;
 
-		//float startTicks = SDL_GetTicks();		// for frame time measuring
-		//float frameTicks;
-		//float desiredFPS;
-
 		_fpsLimiter.begin();
 
 		processInput();
-		_time += 0.01f;		// update time uniform variable
 		_camera.update();	// update camera
 		drawGame();
 
@@ -139,12 +129,5 @@ void MainGame::gameLoop()
 			std::cout << _framerate << std::endl;
 			frameCounter = 0;
 		}
-
-		// limit fps to the max fps
-		//frameTicks = SDL_GetTicks() - startTicks;
-		//desiredFPS = 1000.0f / MAX_FPS;
-		//
-		//if (desiredFPS > frameTicks)
-		//	SDL_Delay(desiredFPS - frameTicks);
 	}
 }

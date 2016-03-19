@@ -44,6 +44,10 @@ int Window::create(std::string windowTitle, int screenWidth, int screenHeight, u
 	glClearColor(0.3f, 1.0f, 1.0f, 1.0f);				// set background clear color
 	SDL_GL_SetSwapInterval(1);							// enable VSYNC
 
+	// enable alpha blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	return 0;											// everything is okay! ;D
 }
 

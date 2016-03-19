@@ -36,7 +36,6 @@ private:
 	int _screenHeight;
 	GameState _gameState;
 	Proj42::GLSLProgram _colorProgram;
-	float _time;
 	float _maxFPS;
 	float _framerate;
 	Proj42::Camera2D _camera;

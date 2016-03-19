@@ -1,10 +1,8 @@
-﻿Build started 3/19/2016 3:02:42 PM.
+﻿Build started 3/19/2016 3:11:15 PM.
      1>Project "C:\Users\computer\Desktop\opengl-engine\Project42\Project42.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Project42.pdb" /Gd /TP /analyze- /errorReport:prompt Timing.cpp
-         Timing.cpp
-     1>c:\users\computer\desktop\opengl-engine\project42\timing.cpp(38): warning C4244: 'initializing': conversion from 'Uint32' to 'float', possible loss of data
-     1>c:\users\computer\desktop\opengl-engine\project42\timing.cpp(45): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Project42.pdb" /Gd /TP /analyze- /errorReport:prompt Window.cpp
+         Window.cpp
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"C:\Users\computer\Desktop\opengl-engine\Debug\Project42.lib" opengl32.lib glew32.lib SDL2.lib SDL2main.lib /NOLOGO Debug\Camera2D.obj
          Debug\Errors.obj
@@ -29,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.66
+Time Elapsed 00:00:01.69
