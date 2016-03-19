@@ -14,6 +14,8 @@ namespace Proj42
 		void update();
 		void init(int screenWidth, int screenHeight);
 
+		glm::vec2 convertScreenToWorldCoords(glm::vec2 screenCoords);
+
 		// setters
 		void setPosition(const glm::vec2& position) { _position = position; _needsMatrixUpdate = true; }
 		void setScale(float scale) { _scale = scale; _needsMatrixUpdate = true; }

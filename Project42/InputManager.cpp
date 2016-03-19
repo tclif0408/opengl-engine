@@ -2,12 +2,19 @@
 
 using namespace Proj42;
 
-InputManager::InputManager()
+InputManager::InputManager() :
+	_mouseCoords(0.0f)
 {
 }
 
 InputManager::~InputManager()
 {
+}
+
+void Proj42::InputManager::setMouseCoords(float x, float y)
+{
+	_mouseCoords.x = x;
+	_mouseCoords.y = y;
 }
 
 void Proj42::InputManager::pressKey(unsigned int keyID)

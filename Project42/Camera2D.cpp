@@ -37,3 +37,17 @@ void Proj42::Camera2D::init(int screenWidth, int screenHeight)
 	_screenHeight = screenHeight;
 	_orthoMatrix = glm::ortho(0.0f, (float)_screenWidth, 0.0f, (float)_screenHeight);
 }
+
+glm::vec2 Proj42::Camera2D::convertScreenToWorldCoords(glm::vec2 screenCoords)
+{
+	// invert y
+	screenCoords.y = _screenHeight - screenCoords.y;
+	// make the center of the screen the origin
+	screenCoords -= glm::vec2(_screenWidth / 2, _screenHeight / 2);
+	// account for scale
+	screenCoords /= _scale;
+	// translate based on camera
+	screenCoords += _position;
+
+	return screenCoords;
+}

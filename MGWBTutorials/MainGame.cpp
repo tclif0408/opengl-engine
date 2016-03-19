@@ -45,8 +45,8 @@ void MainGame::initShaders()
 
 void MainGame::processInput()
 {
-	const float CAM_SPEED = 20.0f;
-	const float SCALE_SPEED = 0.1f;
+	const float CAM_SPEED = 2.0f;
+	const float SCALE_SPEED = 0.05f;
 
 	SDL_Event sdlEvent;
 	
@@ -56,7 +56,13 @@ void MainGame::processInput()
 			_gameState = GameState::EXIT;
 			break;
 		case SDL_MOUSEMOTION:
-			//std::cout << sdlEvent.motion.x << " " << sdlEvent.motion.y << "\n";
+			_inputManager.setMouseCoords(sdlEvent.motion.x, sdlEvent.motion.y);
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			_inputManager.pressKey(sdlEvent.button.button);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			_inputManager.releaseKey(sdlEvent.button.button);
 			break;
 		case SDL_KEYDOWN:
 			_inputManager.pressKey(sdlEvent.key.keysym.sym);
@@ -65,6 +71,34 @@ void MainGame::processInput()
 			_inputManager.releaseKey(sdlEvent.key.keysym.sym);
 			break;
 		}
+
+	if (_inputManager.isKeyPressed(SDLK_w))
+		_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, CAM_SPEED));
+	if (_inputManager.isKeyPressed(SDLK_s))
+		_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, -CAM_SPEED));
+	if (_inputManager.isKeyPressed(SDLK_a))
+		_camera.setPosition(_camera.getPosition() + glm::vec2(-CAM_SPEED, 0.0f));
+	if (_inputManager.isKeyPressed(SDLK_d))
+		_camera.setPosition(_camera.getPosition() + glm::vec2(CAM_SPEED, 0.0f));
+	if (_inputManager.isKeyPressed(SDLK_q))
+		_camera.setScale(_camera.getScale() + SCALE_SPEED);
+	if (_inputManager.isKeyPressed(SDLK_e))
+	{
+		_camera.setScale(_camera.getScale() - SCALE_SPEED);
+		if (_camera.getScale() < 0.0f) _camera.setScale(0.0f);
+	}
+
+	if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT))
+	{
+		glm::vec2 mouseCoords = _inputManager.getMouseCoords();
+		mouseCoords = _camera.convertScreenToWorldCoords(mouseCoords);
+
+		glm::vec2 playerPos(0.0f);
+		glm::vec2 direction = mouseCoords - playerPos;
+		direction = glm::normalize(direction);
+
+		_bullets.emplace_back(playerPos, direction, 5.0f, 1000);
+	}
 }
 
 void MainGame::drawGame()
@@ -90,7 +124,7 @@ void MainGame::drawGame()
 	glm::vec4 position(0.0f, 0.0f, 50.0f, 50.0f);
 	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
 	float depth = 0;
-	static GLuint texture = Proj42::ResourceManager::getTexture("Textures/roxy.png").id;
+	static GLuint texture = Proj42::ResourceManager::getTexture("Textures/maryo.png").id;
 	Proj42::Color color;
 
 	color.r = 255;
@@ -100,6 +134,10 @@ void MainGame::drawGame()
 
 	_spriteBatch.draw(position, uv, color, depth, texture);
 
+	for (int i = 0; i < _bullets.size(); i++)
+		_bullets[i].draw(_spriteBatch);
+
+	// end of drawing code
 	_spriteBatch.end();
 
 	_spriteBatch.renderBatch();
@@ -119,12 +157,22 @@ void MainGame::gameLoop()
 
 		processInput();
 		_camera.update();	// update camera
+
+		// update bullets
+		for (int i = 0; i < _bullets.size(); )
+			if (_bullets[i].update())
+			{
+				_bullets[i] = _bullets.back();
+				_bullets.pop_back();
+			}
+			else i++;
+
 		drawGame();
 
 		_framerate = _fpsLimiter.end();
 
 		// print once every 100 frames
-		if (frameCounter++ == 100)
+		if (frameCounter++ == 10000)
 		{
 			std::cout << _framerate << std::endl;
 			frameCounter = 0;

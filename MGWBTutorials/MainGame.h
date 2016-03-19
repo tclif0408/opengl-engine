@@ -14,6 +14,8 @@
 #include <Project42/InputManager.h>
 #include <Project42/Timing.h>
 
+#include "Bullet.h"
+
 enum class GameState { PLAY, EXIT };
 
 class MainGame
@@ -42,5 +44,6 @@ private:
 	Proj42::SpriteBatch _spriteBatch;
 	Proj42::InputManager _inputManager;
 	Proj42::FPSLimiter _fpsLimiter;
+	std::vector<Bullet> _bullets;
 };
 
