@@ -11,8 +11,8 @@
 #include <Project42/Window.h>
 #include <Project42/Camera2D.h>
 #include <Project42/SpriteBatch.h>
-
-const float MAX_FPS = 60.0f;
+#include <Project42/InputManager.h>
+#include <Project42/Timing.h>
 
 enum class GameState { PLAY, EXIT };
 
@@ -38,9 +38,11 @@ private:
 	GameState _gameState;
 	Proj42::GLSLProgram _colorProgram;
 	float _time;
-	float _fps;
-	float _frameTime;
+	float _maxFPS;
+	float _framerate;
 	Proj42::Camera2D _camera;
 	Proj42::SpriteBatch _spriteBatch;
+	Proj42::InputManager _inputManager;
+	Proj42::FPSLimiter _fpsLimiter;
 };
 

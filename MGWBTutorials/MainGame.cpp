@@ -5,13 +5,13 @@
 
 #include <Project42\Proj42.h>
 #include <Project42\Errors.h>
-#include <Project42\Proj42.h>
 
 MainGame::MainGame() :
 	_screenWidth(1024),
 	_screenHeight(768),
 	_gameState(GameState::PLAY),
-	_time(0.0f)
+	_time(0.0f),
+	_maxFPS(60.0f)
 {
 	_camera.init(_screenWidth, _screenHeight);
 }
@@ -30,8 +30,9 @@ void MainGame::initSystems()
 {
 	Proj42::init();
 	_window.create("Game Engine", _screenWidth, _screenHeight, 0);
-	initShaders();										// initialize shaders
+	initShaders();
 	_spriteBatch.init();
+	_fpsLimiter.init(_maxFPS);
 }
 
 void MainGame::initShaders()
@@ -59,27 +60,10 @@ void MainGame::processInput()
 			//std::cout << sdlEvent.motion.x << " " << sdlEvent.motion.y << "\n";
 			break;
 		case SDL_KEYDOWN:
-			switch (sdlEvent.key.keysym.sym) {
-				// move camera based on input
-			case SDLK_w:
-				_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, CAM_SPEED));
-				break;
-			case SDLK_s:
-				_camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, -CAM_SPEED));
-				break;
-			case SDLK_a:
-				_camera.setPosition(_camera.getPosition() + glm::vec2(-CAM_SPEED, 0.0f));
-				break;
-			case SDLK_d:
-				_camera.setPosition(_camera.getPosition() + glm::vec2(CAM_SPEED, 0.0f));
-				break;
-			case SDLK_q:
-				_camera.setScale(_camera.getScale() + SCALE_SPEED);
-				break;
-			case SDLK_e:
-				_camera.setScale(_camera.getScale() + -SCALE_SPEED);
-				break;
-			}
+			_inputManager.pressKey(sdlEvent.key.keysym.sym);
+			break;
+		case SDL_KEYUP:
+			_inputManager.releaseKey(sdlEvent.key.keysym.sym);
 			break;
 		}
 }
@@ -111,7 +95,7 @@ void MainGame::drawGame()
 	glm::vec4 position(0.0f, 0.0f, 50.0f, 50.0f);
 	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
 	float depth = 0;
-	GLuint texture = Proj42::ResourceManager::getTexture("Textures/vriska.png").id;
+	static GLuint texture = Proj42::ResourceManager::getTexture("Textures/vriska.png").id;
 	Proj42::Color color;
 
 	color.r = 255;
@@ -130,48 +114,17 @@ void MainGame::drawGame()
 	_window.swapBuffer();									// swap buffer
 }
 
-void MainGame::calculateFPS()
-{
-	static const int NUM_SAMPLES = 10;
-	static float frameTimes[NUM_SAMPLES];
-	static float prevTicks = SDL_GetTicks();
-	static int currentFrame = 0;
-
-	float currentTicks;
-	float frameTimeAverage = 0;
-	int count;
-
-	currentTicks = SDL_GetTicks();
-	_frameTime = currentTicks - prevTicks;
-	frameTimes[currentFrame % NUM_SAMPLES] = _frameTime;
-	prevTicks = currentTicks;
-
-	currentFrame++;
-	if (currentFrame < NUM_SAMPLES)
-		count = currentFrame;
-	else
-		count = NUM_SAMPLES;
-
-	for (int i = 0; i < count; i++)
-		frameTimeAverage += frameTimes[i];
-
-	frameTimeAverage /= count;
-
-	if (frameTimeAverage > 0)
-		_fps = 1000.0f / frameTimeAverage;
-	else
-		_fps = 60.0f;		// just fake it
-}
-
 void MainGame::gameLoop()
 {
 	while (_gameState != GameState::EXIT)
 	{
 		static int frameCounter = 0;
 
-		float startTicks = SDL_GetTicks();		// for frame time measuring
-		float frameTicks;
-		float desiredFPS;
+		//float startTicks = SDL_GetTicks();		// for frame time measuring
+		//float frameTicks;
+		//float desiredFPS;
+
+		_fpsLimiter.begin();
 
 		processInput();
 		_time += 0.01f;		// update time uniform variable
@@ -179,18 +132,20 @@ void MainGame::gameLoop()
 		drawGame();
 		calculateFPS();
 
+		_framerate = _fpsLimiter.end();
+
 		// print once every 100 frames
 		if (frameCounter++ == 100)
 		{
-			std::cout << _fps << std::endl;
+			std::cout << _framerate << std::endl;
 			frameCounter = 0;
 		}
 
 		// limit fps to the max fps
-		frameTicks = SDL_GetTicks() - startTicks;
-		desiredFPS = 1000.0f / MAX_FPS;
-
-		if (desiredFPS > frameTicks)
-			SDL_Delay(desiredFPS - frameTicks);
+		//frameTicks = SDL_GetTicks() - startTicks;
+		//desiredFPS = 1000.0f / MAX_FPS;
+		//
+		//if (desiredFPS > frameTicks)
+		//	SDL_Delay(desiredFPS - frameTicks);
 	}
 }
