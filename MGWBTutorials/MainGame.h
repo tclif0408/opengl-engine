@@ -27,7 +27,6 @@ public:
 	void initShaders();
 	void processInput();
 	void drawGame();
-	void calculateFPS();
 
 private:
 	void gameLoop();

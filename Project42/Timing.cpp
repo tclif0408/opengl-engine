@@ -23,6 +23,7 @@ void Proj42::FPSLimiter::setTargetFPS(float targetFPS)
 void Proj42::FPSLimiter::begin()
 {
 	_startTicks = SDL_GetTicks();
+	calculateFPS();
 }
 
 float Proj42::FPSLimiter::end()

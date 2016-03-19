@@ -130,7 +130,6 @@ void MainGame::gameLoop()
 		_time += 0.01f;		// update time uniform variable
 		_camera.update();	// update camera
 		drawGame();
-		calculateFPS();
 
 		_framerate = _fpsLimiter.end();
 
