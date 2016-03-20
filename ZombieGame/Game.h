@@ -7,6 +7,13 @@
 #include <Project42\InputManager.h>
 #include <Project42\Timing.h>
 
+#include <vector>
+
+#include "Wall.h"
+#include "Player.h"
+
+class Player;
+
 enum class GameState { PLAY, EXIT };
 
 class Game
@@ -16,6 +23,8 @@ public:
 	~Game();
 
 	void run();
+
+	Proj42::InputManager InputManager;
 
 private:
 	void initSystems();
@@ -34,7 +43,9 @@ private:
 	Proj42::GLSLProgram _shaderProgram;
 	Proj42::Camera2D _camera;
 	Proj42::SpriteBatch _spriteBatch;
-	Proj42::InputManager _inputManager;
 	Proj42::FPSLimiter _fpsLimiter;			// really only calculates fps
+
+	std::vector<Wall> _testwalls;
+	Player* _player;
 };
 

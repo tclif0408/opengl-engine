@@ -20,7 +20,7 @@ static Proj42::Color WHITE()
 class Drawable
 {
 public:
-	Drawable(glm::vec2 position, GLuint textureID, glm::vec4 uv = GLOBAL_UV(), float depth = GLOBAL_DEPTH(), Proj42::Color color = WHITE());
+	Drawable(glm::vec4 boundingBox, GLuint textureID, glm::vec4 uv = GLOBAL_UV(), float depth = GLOBAL_DEPTH(), Proj42::Color color = WHITE());
 	~Drawable();
 
 	void draw(Proj42::SpriteBatch& spriteBatch);

@@ -1,18 +1,22 @@
 #include "Game.h"
 
+#include <iostream>
+
 #include <Project42\Proj42.h>
 
 Game::Game() :
 	_screenWidth(1024),
 	_screenHeight(786),
 	_gameState(GameState::PLAY),
-	_desiredFramerate(60.0f)
+	_desiredFramerate(60.0f)	
 {
 	_camera.init(_screenWidth, _screenHeight);
+	_camera.setScale(1.5f);
 }
 
 Game::~Game()
 {
+	delete _player;
 }
 
 void Game::run()
@@ -49,19 +53,19 @@ void Game::processInput()
 			_gameState = GameState::EXIT;
 			break;
 		case SDL_MOUSEMOTION:
-			_inputManager.setMouseCoords(sdlEvent.motion.x, sdlEvent.motion.y);
+			InputManager.setMouseCoords(sdlEvent.motion.x, sdlEvent.motion.y);
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-			_inputManager.pressKey(sdlEvent.button.button);
+			InputManager.pressKey(sdlEvent.button.button);
 			break;
 		case SDL_MOUSEBUTTONUP:
-			_inputManager.releaseKey(sdlEvent.button.button);
+			InputManager.releaseKey(sdlEvent.button.button);
 			break;
 		case SDL_KEYDOWN:
-			_inputManager.pressKey(sdlEvent.key.keysym.sym);
+			InputManager.pressKey(sdlEvent.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
-			_inputManager.releaseKey(sdlEvent.key.keysym.sym);
+			InputManager.releaseKey(sdlEvent.key.keysym.sym);
 			break;
 		}
 }
@@ -80,22 +84,10 @@ void Game::drawGame()
 
 	_spriteBatch.begin();
 
-	/*	Example drawing code:
+	for (int i = 0; i < _testwalls.size(); i++)
+		_testwalls[i].draw(_spriteBatch);
 
-	glm::vec4 position(0.0f, 0.0f, 50.0f, 50.0f);
-	glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
-	float depth = 0;
-	static GLuint texture = Proj42::ResourceManager::getTexture("Textures/maryo.png").id;
-	Proj42::Color color;
-
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	color.a = 255;
-
-	_spriteBatch.draw(position, uv, color, depth, texture);
-	
-	*/
+	_player->draw(_spriteBatch);
 
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
@@ -107,11 +99,28 @@ void Game::drawGame()
 
 void Game::updateGame()
 {
+	// exit the game with the escape key
+	if (InputManager.isKeyPressed(SDLK_ESCAPE))
+		_gameState = GameState::EXIT;
+
+	// update the player
+	_player->update();
+
+	// have the camera track the player
+	_camera.setPosition(_player->getPosition());
+
 	_camera.update();
 }
 
 void Game::gameLoop()
 {
+	_testwalls.emplace_back(glm::vec4(0.0f, 0.0f, 30.0f, 30.0f), WallType::BRICK);
+	_testwalls.emplace_back(glm::vec4(0.0f, 30.0f, 30.0f, 30.0f), WallType::BRICK);
+	_testwalls.emplace_back(glm::vec4(40.0f, 0.0f, 30.0f, 30.0f), WallType::GLASS);
+	_testwalls.emplace_back(glm::vec4(70.0f, 20.0f, 30.0f, 30.0f), WallType::GLASS);
+
+	_player = new Player(glm::vec4(0.0f, 0.0f, 30.0f, 30.0f), this);
+
 	while (_gameState != GameState::EXIT)
 	{
 		_fpsLimiter.begin();
