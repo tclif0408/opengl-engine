@@ -1,16 +1,6 @@
 #include "Player.h"
 #include "Game.h"
 
-Player::Player(glm::vec4 boundingBox, Game* game, glm::vec4 uv, float depth)
-	: Entity(boundingBox, PlayerTexture(), uv, depth, PlayerColor())
-{
-	_game = game;
-}
-
-Player::~Player()
-{
-}
-
 void Player::update()
 {
 	// update based on input

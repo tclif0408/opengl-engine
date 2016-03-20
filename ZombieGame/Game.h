@@ -11,6 +11,7 @@
 
 #include "Wall.h"
 #include "Player.h"
+#include "Civillian.h"
 
 class Player;
 
@@ -47,5 +48,6 @@ private:
 
 	std::vector<Wall> _testwalls;
 	Player* _player;
+	std::vector<Civillian> _civies;
 };
 

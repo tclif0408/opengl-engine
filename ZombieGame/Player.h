@@ -11,9 +11,9 @@ static Proj42::Color PlayerColor()
 {
 	Proj42::Color playerColor;
 	playerColor.r = 255;
-	playerColor.r = 0;
-	playerColor.r = 128;
-	playerColor.r = 255;
+	playerColor.g = 0;
+	playerColor.b = 128;
+	playerColor.a = 255;
 	return playerColor;
 }
 
@@ -28,12 +28,14 @@ const float PLAYER_SPEED = 5.0f;
 class Player: public Entity
 {
 public:
-	Player(glm::vec4 boundingBox, Game* game, glm::vec4 uv = GLOBAL_UV(), float depth = GLOBAL_DEPTH());
-	~Player();
+	Player::Player(glm::vec4 boundingBox, Game* game, glm::vec4 uv = GLOBAL_UV(), float depth = GLOBAL_DEPTH())
+		: Entity(boundingBox, PlayerTexture(), uv, depth, PlayerColor())
+	{
+		_game = game;
+	}
+	~Player() {}
 
 	void update();
-
-	glm::vec2 getPosition() { return glm::vec2(_boundingBox.x, _boundingBox.y); }
 
 private:
 	Game* _game;

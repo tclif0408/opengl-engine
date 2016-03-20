@@ -9,6 +9,16 @@ public:
 		: Drawable(boundingBox, textureID, uv, depth, color) {}
 	~Entity() {}
 
-	virtual void update() = 0;
+	virtual void update() {};
+
+	float getRadius()
+	{
+		return _boundingBox.w / 2;
+	}
+
+	glm::vec2 getPosition()
+	{
+		return glm::vec2(_boundingBox.x, _boundingBox.y);
+	}
 };
 
