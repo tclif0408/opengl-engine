@@ -5,7 +5,6 @@
 class Game;
 
 #include <Project42\vertex.h>
-#include <Project42\ResourceManager.h>
 
 static Proj42::Color PlayerColor()
 {

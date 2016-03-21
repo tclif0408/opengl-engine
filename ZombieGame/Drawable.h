@@ -25,6 +25,8 @@ public:
 
 	void draw(Proj42::SpriteBatch& spriteBatch);
 
+	glm::vec4 getBoundingBox() { return _boundingBox; }
+
 protected:
 	glm::vec4 _boundingBox;
 	glm::vec4 _uv;

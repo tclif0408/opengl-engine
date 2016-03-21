@@ -2,8 +2,6 @@
 
 #include "Entity.h"
 
-#include <Project42\ResourceManager.h>
-
 static GLuint CivillianTexture()
 {
 	return Proj42::ResourceManager::getTexture("Textures/circle.png").id;

@@ -115,15 +115,21 @@ void Game::updateGame()
 	for (int i = 0; i < _civies.size(); i++)
 		_civies[i].update();
 
-	// have the camera track the player
-	_camera.setPosition(_player->getPosition());
-
 	// collide player with civillians
 	for (int i = 0; i < _civies.size(); i++)
 		if (circleCollision(_player->getRadius(), _player->getPosition(), _civies[i].getRadius(), _civies[i].getPosition()))
-			std::cout << "Collision!\n";
-		else
-			std::cout << "No Collision!\n";
+		{
+			_player->undoMove();
+			_civies[i].undoMove();
+		}
+
+	// collide player with walls
+	for (int i = 0; i < _testwalls.size(); i++)
+		if (circleRectCollision(_player->getPosition(), _player->getRadius(), _testwalls[i].getBoundingBox()))
+			_player->undoMove();
+
+	// have the camera track the player
+	_camera.setPosition(_player->getPosition());
 
 	_camera.update();
 }
@@ -135,10 +141,9 @@ void Game::gameLoop()
 	_testwalls.emplace_back(glm::vec4(40.0f, 0.0f, 30.0f, 30.0f), WallType::GLASS);
 	_testwalls.emplace_back(glm::vec4(70.0f, 20.0f, 30.0f, 30.0f), WallType::GLASS);
 
-	_civies.emplace_back(glm::vec4(100.0f, 100.0f, 30.0f, 30.0f));
 	_civies.emplace_back(glm::vec4(140.0f, 140.0f, 30.0f, 30.0f));
 
-	_player = new Player(glm::vec4(0.0f, 0.0f, 30.0f, 30.0f), this);
+	_player = new Player(glm::vec4(200.0f, 0.0f, 30.0f, 30.0f), this);
 
 	while (_gameState != GameState::EXIT)
 	{

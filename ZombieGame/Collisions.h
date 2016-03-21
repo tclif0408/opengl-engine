@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 
 #include <cmath>
+#include <math.h>
 
 bool circleCollision(float r1, glm::vec2 pos1, float r2, glm::vec2 pos2)
 {
@@ -10,6 +11,25 @@ bool circleCollision(float r1, glm::vec2 pos1, float r2, glm::vec2 pos2)
 	int dy = std::abs(pos1.y - pos2.y);
 	int dist = std::sqrt(dx * dx + dy * dy);
 	return dist < r1 + r2;
+}
+
+bool circleRectCollision(glm::vec2 circlePos, float radius, glm::vec4 rect)
+{
+	glm::vec2 circleDist = glm::vec2(std::abs(circlePos.x - rect.x), std::abs(circlePos.y - rect.y));
+
+	if (circleDist.x > (rect[2] / 2 + radius))
+		return false;
+	if (circleDist.y > (rect[3] / 2 + radius))
+		return false;
+
+	if (circleDist.x <= (rect[2] / 2))
+		return true;
+	if (circleDist.y <= (rect[3] / 2)) 
+		return true;
+
+	float cornerDistance_sq = std::pow(circleDist.x - rect[2] / 2, 2) + std::pow(circleDist.y - rect[3] / 2, 2);
+
+	return (cornerDistance_sq <= (radius * radius));
 }
 
 /*

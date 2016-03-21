@@ -2,4 +2,5 @@
 
 void Civillian::update()
 {
+	Entity::update();
 }
