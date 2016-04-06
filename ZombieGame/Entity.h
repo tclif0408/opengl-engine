@@ -11,16 +11,7 @@ public:
 		: Drawable(boundingBox, textureID, uv, depth, color) {}
 	~Entity() {}
 
-	virtual void update()
-	{
-		_prevPosition.x = _boundingBox.x;
-		_prevPosition.y = _boundingBox.y;
-	}
-
-	void undoMove()
-	{
-		setPosition(_prevPosition);
-	}
+	virtual void update() { }
 
 	float getRadius()
 	{

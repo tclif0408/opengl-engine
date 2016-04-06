@@ -89,8 +89,8 @@ void Game::drawGame()
 	for (int i = 0; i < _testwalls.size(); i++)
 		_testwalls[i].draw(_spriteBatch);
 
-	for (int i = 0; i < _civies.size(); i++)
-		_civies[i].draw(_spriteBatch);
+	for (int i = 0; i < _civillians.size(); i++)
+		_civillians[i].draw(_spriteBatch);
 
 	_player->draw(_spriteBatch);
 
@@ -112,21 +112,13 @@ void Game::updateGame()
 	_player->update();
 
 	// update civillians
-	for (int i = 0; i < _civies.size(); i++)
-		_civies[i].update();
+	for (int i = 0; i < _civillians.size(); i++)
+		_civillians[i].update();
 
 	// collide player with civillians
-	for (int i = 0; i < _civies.size(); i++)
-		if (circleCollision(_player->getRadius(), _player->getPosition(), _civies[i].getRadius(), _civies[i].getPosition()))
-		{
-			_player->undoMove();
-			_civies[i].undoMove();
-		}
-
-	// collide player with walls
-	for (int i = 0; i < _testwalls.size(); i++)
-		if (circleRectCollision(_player->getPosition(), _player->getRadius(), _testwalls[i].getBoundingBox()))
-			_player->undoMove();
+	for (int i = 0; i < _civillians.size(); i++)
+		if (circleCollision(_player->getRadius(), _player->getPosition(), _civillians[i].getRadius(), _civillians[i].getPosition()))
+			resolveCollision();
 
 	// have the camera track the player
 	_camera.setPosition(_player->getPosition());
@@ -141,7 +133,7 @@ void Game::gameLoop()
 	_testwalls.emplace_back(glm::vec4(40.0f, 0.0f, 30.0f, 30.0f), WallType::GLASS);
 	_testwalls.emplace_back(glm::vec4(70.0f, 20.0f, 30.0f, 30.0f), WallType::GLASS);
 
-	_civies.emplace_back(glm::vec4(140.0f, 140.0f, 30.0f, 30.0f));
+	_civillians.emplace_back(glm::vec4(140.0f, 140.0f, 30.0f, 30.0f));
 
 	_player = new Player(glm::vec4(200.0f, 0.0f, 30.0f, 30.0f), this);
 

@@ -48,6 +48,6 @@ private:
 
 	std::vector<Wall> _testwalls;
 	Player* _player;
-	std::vector<Civillian> _civies;
+	std::vector<Civillian> _civillians;
 };
 

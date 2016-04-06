@@ -3,8 +3,6 @@
 
 void Player::update()
 {
-	Entity::update();
-
 	// update based on input
 	if (_game->InputManager.isKeyPressed(SDLK_w))
 		_boundingBox.y += PLAYER_SPEED;
