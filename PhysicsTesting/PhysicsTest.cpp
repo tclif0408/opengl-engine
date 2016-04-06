@@ -1,10 +1,15 @@
 #include "PhysicsTest.h"
 
+#include "Physics.h"
+
+#include <chrono>
+#include <ctime>
 #include <iostream>
 #include <string>
 
 #include <Project42\Proj42.h>
 #include <Project42\Errors.h>
+#include <Project42\ResourceManager.h>
 
 PhysicsTest::PhysicsTest() :
 	_screenWidth(1024),
@@ -12,7 +17,14 @@ PhysicsTest::PhysicsTest() :
 	_state(State::PLAY),
 	_maxFPS(60.0f)
 {
+	_rects.emplace_back(glm::vec2(0.0f, 0.0f), glm::vec2(30.0f, 30.0f), glm::vec2(1.0f, 1.0f));
+	_rects.emplace_back(glm::vec2((float)_screenWidth - 30.0f, (float)_screenHeight - 30.0f), glm::vec2(30.0f, 30.0f), glm::vec2(-1.0f, -1.0f));
+
+	_rects.emplace_back(glm::vec2(0.0f, 300.0f), glm::vec2(30.0f, 30.0f), glm::vec2(1.0f, 0.0f));
+	_rects.emplace_back(glm::vec2(900.0f, 300.0f), glm::vec2(30.0f, 30.0f), glm::vec2(-1.0f, 0.0f));
+
 	_camera.init(_screenWidth, _screenHeight);
+	_camera.setPosition(_camera.getPosition() + glm::vec2(_screenWidth / 2, _screenHeight / 2));
 }
 
 PhysicsTest::~PhysicsTest()
@@ -28,7 +40,7 @@ void PhysicsTest::run()
 void PhysicsTest::initSystems()
 {
 	Proj42::init();
-	_window.create("Physics simulation", _screenWidth, _screenHeight, 0);
+	_window.create("Physics test", _screenWidth, _screenHeight, 0);
 	initShaders();
 	_spriteBatch.init();
 	_fpsLimiter.init(_maxFPS);
@@ -66,6 +78,22 @@ void PhysicsTest::update()
 {
 	if (_inputManager.isKeyPressed(SDLK_ESCAPE))
 		_state = State::EXIT;
+
+	for (unsigned int i = 0; i < _rects.size(); i++)
+		_rects[i].update();
+
+	static int collideCount = 0;
+
+	// test for collisions
+	for (unsigned int i = 0; i < _rects.size(); i++)
+		for (unsigned int j = 0; j < _rects.size(); j++)
+			if (i == j)
+				continue;
+			else
+				if (AABBvsAABB(_rects[i], _rects[j]))
+				{
+					std::printf("There was a collision! %d\n", collideCount++);
+				}
 }
 
 void PhysicsTest::drawGame()
@@ -84,6 +112,18 @@ void PhysicsTest::drawGame()
 
 	_spriteBatch.begin();
 
+	for (unsigned int i = 0; i < _rects.size(); i++)
+	{
+		static GLuint textureID = Proj42::ResourceManager::getTexture("Textures/block.png").id;
+		Proj42::Color white;
+		white.r = 255;
+		white.g = 255;
+		white.b = 255;
+		white.a = 255;
+
+		_spriteBatch.draw(_rects[i].getPosAndSize(), glm::vec4(0.0, 0.0, 1.0f, 1.0f), white, 0, textureID);
+
+	}
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
 

@@ -123,10 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABBRect.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysicsTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABBRect.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="PhysicsTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

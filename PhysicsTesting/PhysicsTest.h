@@ -7,6 +7,8 @@
 #include <Project42\InputManager.h>
 #include <Project42\Timing.h>
 
+#include "AABBRect.h"
+
 enum class State { PLAY, EXIT };
 
 class PhysicsTest
@@ -36,5 +38,7 @@ private:
 	int _screenHeight;
 	float _maxFPS;
 	float _framerate;
+
+	std::vector<AABBRect> _rects;
 };
 
