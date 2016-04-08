@@ -4,20 +4,17 @@
 	http://www.metanetsoftware.com/technique/tutorialA.html
 	https://www.toptal.com/game/video-game-physics-part-ii-collision-detection-for-solid-objects
 	https://www.reddit.com/r/gamedev/comments/15kk3w/can_you_recommend_a_simple_open_source_2d_game/
+	http://www.gamedev.net/topic/593498-hopefully-simple-collision-resolution-question/
+
+	http://hamaluik.com/haxe-glm/glm/Vec4.html
 
 	https://en.wikipedia.org/wiki/Teeworlds
 	https://en.wikipedia.org/wiki/Secret_Maryo_Chronicles
+
+	x, y, z, w <-- glm::vec4
 */
 
-struct AABB {
-	glm::vec2 min;
-	glm::vec2 max;
-};
-
-struct Circle {
-	glm::vec2 pos;
-	float radius;
-};
+#include "CollisionModel.h"
 
 
 bool collideAABBs(AABB* a, AABB* b)
@@ -41,7 +38,7 @@ bool collideCircles(Circle *a, Circle* b)
 	float x = a->pos.x - b->pos.x;
 	float y = a->pos.y - b->pos.y;
 	float centerDistanceSq = x * x + y * y;
-	float radius = a->radius + b->radius;
+	float radius = a->r + b->r;
 	float radiusSq = radius * radius;
 	return centerDistanceSq <= radiusSq;
 }

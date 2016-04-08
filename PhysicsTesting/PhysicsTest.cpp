@@ -28,6 +28,11 @@ PhysicsTest::~PhysicsTest()
 void PhysicsTest::run()
 {
 	initSystems();
+
+	_physObjs.emplace_back(glm::vec4(0.0f, 0.0f, 30.0f, 30.0f), Proj42::ResourceManager::getTexture("Textures/block.png").id, glm::vec2(1.0f, 2.0f));
+	_physObjs.emplace_back(glm::vec4(50.0f, 50.0f, 30.0f, 30.0f), Proj42::ResourceManager::getTexture("Textures/block.png").id, glm::vec2(2.0f, 1.0f));
+	_physObjs.emplace_back(glm::vec4(100.0f, 200.0f, 30.0f, 30.0f), Proj42::ResourceManager::getTexture("Textures/block.png").id, glm::vec2(-1.0f, 2.0f));
+
 	gameLoop();
 }
 
@@ -72,6 +77,9 @@ void PhysicsTest::update()
 {
 	if (_inputManager.isKeyPressed(SDLK_ESCAPE))
 		_state = State::EXIT;
+
+	for (unsigned int i = 0; i < _physObjs.size(); i++)
+		_physObjs[i].update();
 }
 
 void PhysicsTest::drawGame()
@@ -89,6 +97,10 @@ void PhysicsTest::drawGame()
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &cameraMatrix[0][0]);
 
 	_spriteBatch.begin();
+
+	for (unsigned int i = 0; i < _physObjs.size(); i++)
+		_physObjs[i].draw(_spriteBatch);
+
 	_spriteBatch.end();
 	_spriteBatch.renderBatch();
 
