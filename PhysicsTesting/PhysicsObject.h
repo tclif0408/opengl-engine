@@ -1,24 +1,25 @@
 #pragma once
 
-#include <glm\glm.hpp>
-#include <GL\glew.h>
+#include <Project42\DrawableGameComponent.h>
 
-#include <Project42\SpriteBatch.h>
+#include "Physics.h"
 
-#include "CollisionModel.h"
+class PhysicsObject : public Proj42::DrawableGameComponent {
 
-class PhysicsObject
-{
 public:
-	PhysicsObject(glm::vec4 drawRect, GLuint texID, glm::vec2 vel = glm::vec2(0.0f));
-	~PhysicsObject();
+	//PhysicsObject po = PhysicsObject(vel, this, bb, id, color, depth)
+	PhysicsObject(glm::vec2 velocity, PhysicsTest* game, glm::vec4 boundingBox, GLuint textureID, Proj42::Color color = Proj42::Color(255, 255, 255, 255), float depth = 0.0f)
+		: DrawableGameComponent(game, boundingBox, textureID, color, depth)
+	{
+		_velocity = velocity;
+	}
+	~PhysicsObject() { }
+
 	void update();
-	void draw(Proj42::SpriteBatch &sb);
 	AABB getAABB();
 
 private:
-	glm::vec4 _drawingRect;
-	glm::vec2 _velocity;
-	GLuint _texID;
-};
 
+	glm::vec2 _velocity;
+
+};

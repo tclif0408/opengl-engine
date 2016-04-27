@@ -3,7 +3,8 @@
 
 int main(int argc, char** argv)
 {
-	PhysicsTest pt;
-	pt.run();
+	std::string vertexFilePath = "";
+	std::string fragmentFilePath = "";
+	std::vector<std::string*> attribs;
 	return 0;
 }

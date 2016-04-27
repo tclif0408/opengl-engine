@@ -14,6 +14,12 @@ namespace Proj42
 		GLubyte g;
 		GLubyte b;
 		GLubyte a;
+
+		Color() {}
+
+		Color(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha)
+			: r(red), g(green), b(blue), a(alpha) {}
+
 	};
 
 	struct UV {
