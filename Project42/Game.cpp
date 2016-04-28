@@ -5,13 +5,18 @@ namespace Proj42 {
 	Game::Game(
 		int windowWidth,
 		int windowHeight,
-		ShaderInfo* shaderInfo)
+		std::string* fragmentFilePath,
+		std::string* vertexFilePath,
+		std::vector<std::string*>* shaderAttributes)
 	{
 		_gameState = GameState::PLAY;
 		_screenWidth = windowWidth;
 		_screenHeight = windowHeight;
 		_maxFPS = 30.0f;
-		_shaderInfo = shaderInfo;
+		_fragmentFilePath = fragmentFilePath;
+		_vertexFilePath = vertexFilePath;
+		_shaderAttributes = shaderAttributes;
+
 		_camera.init(_screenWidth, _screenHeight);
 	}
 
@@ -37,14 +42,14 @@ namespace Proj42 {
 
 	void Game::update()
 	{
-		for (unsigned int i = 0; i < _components.size(); i++)
-			_components[i]->update();
+		for (int i = 0; i < _components.size(); i++)
+			_components[i].update();
 	}
 
 	void Game::draw()
 	{
-		for (unsigned int i = 0; i < _components.size(); i++)
-			if (DrawableGameComponent* drawable = dynamic_cast<DrawableGameComponent*>(_components[i]))
+		for (int i = 0; i < _components.size(); i++)
+			if (DrawableGameComponent* drawable = dynamic_cast<DrawableGameComponent*>(&_components[i]))
 				drawable->draw(_spriteBatch);
 	}
 
@@ -68,10 +73,10 @@ namespace Proj42 {
 
 	void Game::initShaders()
 	{
-		_shaderProgram.compileShaders(_shaderInfo->vertexPath, _shaderInfo->fragmentPath);
+		_shaderProgram.compileShaders(*_vertexFilePath, *_fragmentFilePath);
 
-		for (std::string s : _shaderInfo->attributes)
-			_shaderProgram.addAttribute(s);
+		for (std::string* s : *_shaderAttributes)
+			_shaderProgram.addAttribute(*s);
 
 		_shaderProgram.linkShaders();
 	}

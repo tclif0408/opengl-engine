@@ -1,22 +1,38 @@
-﻿Build started 4/27/2016 8:00:42 PM.
-     1>Project "C:\Users\computer\Desktop\opengl-engine\Project42\Project42.vcxproj" on node 2 (Build target(s)).
+﻿Build started 4/27/2016 2:04:38 PM.
+     1>Project "D:\opengl-engine\Project42\Project42.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Project42.pdb" /Gd /TP /analyze- /errorReport:prompt DrawableGameComponent.cpp Game.cpp GameComponent.cpp
-         GameComponent.cpp
-     1>c:\users\computer\desktop\opengl-engine\project42\gamecomponent.cpp(5): error C2664: 'void Proj42::Game::addGameComponent(GameComponent &)': cannot convert argument 1 from 'Proj42::GameComponent' to 'GameComponent &'
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Project42.pdb" /Gd /TP /analyze- /errorReport:prompt DrawableGameComponent.cpp Game.cpp
          Game.cpp
-     1>c:\users\computer\desktop\opengl-engine\project42\game.cpp(41): error C2027: use of undefined type 'GameComponent'
-         c:\users\computer\desktop\opengl-engine\project42\game.h(6): note: see declaration of 'GameComponent'
-     1>c:\users\computer\desktop\opengl-engine\project42\game.cpp(41): error C2227: left of '->update' must point to class/struct/union/generic type
-     1>c:\users\computer\desktop\opengl-engine\project42\game.cpp(47): error C2065: 'DrawableGameComponent': undeclared identifier
-     1>c:\users\computer\desktop\opengl-engine\project42\game.cpp(47): error C2065: 'drawable': undeclared identifier
-     1>c:\users\computer\desktop\opengl-engine\project42\game.cpp(47): error C2061: syntax error: identifier 'DrawableGameComponent'
+     1>d:\opengl-engine\project42\game.h(30): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+     1>d:\opengl-engine\project42\game.cpp(45): warning C4018: '<': signed/unsigned mismatch
+     1>d:\opengl-engine\project42\game.cpp(51): warning C4018: '<': signed/unsigned mismatch
          Generating Code...
-         Compiling...
+         Skipping... (no relevant changes detected)
          DrawableGameComponent.cpp
-         Generating Code...
-     1>Done Building Project "C:\Users\computer\Desktop\opengl-engine\Project42\Project42.vcxproj" (Build target(s)) -- FAILED.
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\opengl-engine\Debug\Project42.lib" opengl32.lib glew32.lib SDL2.lib SDL2main.lib /NOLOGO Debug\Camera2D.obj
+         Debug\DrawableGameComponent.obj
+         Debug\Errors.obj
+         Debug\Game.obj
+         Debug\GLSLProgram.obj
+         Debug\ImageLoader.obj
+         Debug\InputManager.obj
+         Debug\IOManager.obj
+         Debug\picoPNG.obj
+         Debug\Proj42.obj
+         Debug\ResourceManager.obj
+         Debug\Sprite.obj
+         Debug\SpriteBatch.obj
+         Debug\TextureCache.obj
+         Debug\Timing.obj
+         Debug\Window.obj
+     1>glew32.lib(glew32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in opengl32.lib(OPENGL32.dll); second definition ignored
+     1>glew32.lib(glew32.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+     1>SDL2.lib(SDL2.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in opengl32.lib(OPENGL32.dll); second definition ignored
+     1>SDL2.lib(SDL2.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+         Project42.vcxproj -> D:\opengl-engine\Debug\Project42.lib
+     1>Done Building Project "D:\opengl-engine\Project42\Project42.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:09.54
+Time Elapsed 00:00:02.35

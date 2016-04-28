@@ -1,5 +1,7 @@
 #include "PhysicsObject.h"
 
+// glm::vec4 --> x y z w
+
 void PhysicsObject::update()
 {
 	DrawableGameComponent::setPosition(DrawableGameComponent::getPosition() + _velocity);

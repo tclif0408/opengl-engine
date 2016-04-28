@@ -6,8 +6,8 @@
 class PhysicsTest : public Proj42::Game {
 
 public:
-	PhysicsTest(int windowWidth, int windowHeight, Proj42::ShaderInfo shaderInfo)
-		: Proj42::Game(windowWidth, windowHeight, shaderInfo) {}
+	PhysicsTest(int windowWidth, int windowHeight, std::string* fragmentFilePath, std::string* vertexFilePath, std::vector<std::string*>* shaderAttributes)
+		: Proj42::Game(windowWidth, windowHeight, fragmentFilePath, vertexFilePath, shaderAttributes) {}
 	~PhysicsTest() {}
 	
 private:
