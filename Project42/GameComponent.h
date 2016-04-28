@@ -1,11 +1,13 @@
 #pragma once
 
+#include "Game.h"
+
 namespace Proj42 {
 
 	class GameComponent
 	{
 	public:
-		GameComponent() {}
+		GameComponent(Game* game);
 		~GameComponent() {}
 		virtual void update() {}
 	};

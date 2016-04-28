@@ -1,8 +1,5 @@
 #include "Proj42.h"
 
-#include <SDL/SDL.h>
-#include <GL/glew.h>
-
 namespace Proj42
 {
 	int init()
