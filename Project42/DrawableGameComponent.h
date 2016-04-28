@@ -1,9 +1,15 @@
 #pragma once
 
 #include "GameComponent.h"
+<<<<<<< Updated upstream
 #include "SpriteBatch.h"
 #include "vertex.h"
 #include <glm\glm.hpp>
+=======
+#include "Proj42.h"
+#include "vertex.h"
+#include "SpriteBatch.h"
+>>>>>>> Stashed changes
 
 namespace Proj42 {
 

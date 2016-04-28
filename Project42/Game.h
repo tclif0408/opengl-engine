@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vector>
+#include <string>
+
+#include "DrawableGameComponent.h"
 #include "Proj42.h"
 
 #include "Camera2D.h"
@@ -21,13 +25,14 @@ namespace Proj42 {
 		Game(int windowWidth, int windowHeight, std::string* fragmentFilePath, std::string* vertexFilePath, std::vector<std::string*>* shaderAttributes);
 		~Game();
 
+		void addGameComponent(GameComponent* component) { _components.push_back(component); }
 		void run();
 
 	protected:
 		bool isKeyPressed(unsigned int keyID) { return _inputManager.isKeyPressed(keyID); }
 		glm::vec2 CenterScreen() { return glm::vec2(_screenWidth / 2.0f, _screenHeight / 2.0f); }
-		GLuint getTextureID(const std::string& filePath) { ResourceManager::getTexture(filePath).id; }
-		int getFrameRate() { return _currentFramerate; }
+		GLuint getTextureID(const std::string& filePath) { return ResourceManager::getTexture(filePath).id; }
+		float getFrameRate() { return _currentFramerate; }
 
 		void setCameraPos(glm::vec2 val) { _camera.setPosition(val); }
 		void setDesiredFPS(float value) { _maxFPS = value; }
@@ -59,10 +64,8 @@ namespace Proj42 {
 		Proj42::InputManager _inputManager;
 		Proj42::GLSLProgram _shaderProgram;
 		Proj42::SpriteBatch _spriteBatch;
-		std::string* _fragmentFilePath;
-		std::string* _vertexFilePath;
-		std::vector<std::string*>* _shaderAttributes;
-		std::vector<GameComponent> _components;
+		ShaderInfo* _shaderInfo;
+		std::vector<GameComponent*> _components;
 
 	};
 

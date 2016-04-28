@@ -150,6 +150,8 @@
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="IOManager.h" />
+    <ClInclude Include="Keys.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="picoPNG.h" />
     <ClInclude Include="Proj42.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -169,6 +171,7 @@
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="IOManager.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="picoPNG.cpp" />
     <ClCompile Include="Proj42.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
