@@ -1,28 +1,8 @@
-<<<<<<< Updated upstream
-﻿Build started 4/27/2016 2:04:38 PM.
+﻿Build started 4/28/2016 1:39:30 PM.
      1>Project "D:\opengl-engine\Project42\Project42.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Project42.pdb" /Gd /TP /analyze- /errorReport:prompt DrawableGameComponent.cpp Game.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Project42.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
          Game.cpp
-     1>d:\opengl-engine\project42\game.h(30): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-     1>d:\opengl-engine\project42\game.cpp(45): warning C4018: '<': signed/unsigned mismatch
-     1>d:\opengl-engine\project42\game.cpp(51): warning C4018: '<': signed/unsigned mismatch
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         DrawableGameComponent.cpp
-=======
-﻿Build started 4/28/2016 9:12:45 AM.
-     1>Project "D:\opengl-engine\Project42\Project42.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\Project42.pdb" /Gd /TP /analyze- /errorReport:prompt DrawableGameComponent.cpp Game.cpp Math.cpp Proj42.cpp
-         Math.cpp
-         Generating Code...
-         Compiling...
-         Proj42.cpp
-         Game.cpp
-         DrawableGameComponent.cpp
-         Generating Code...
->>>>>>> Stashed changes
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"D:\opengl-engine\Debug\Project42.lib" opengl32.lib glew32.lib SDL2.lib SDL2main.lib /NOLOGO Debug\Camera2D.obj
          Debug\DrawableGameComponent.obj
@@ -32,10 +12,7 @@
          Debug\ImageLoader.obj
          Debug\InputManager.obj
          Debug\IOManager.obj
-<<<<<<< Updated upstream
-=======
          Debug\Math.obj
->>>>>>> Stashed changes
          Debug\picoPNG.obj
          Debug\Proj42.obj
          Debug\ResourceManager.obj
@@ -53,8 +30,4 @@
 
 Build succeeded.
 
-<<<<<<< Updated upstream
-Time Elapsed 00:00:02.35
-=======
-Time Elapsed 00:00:03.71
->>>>>>> Stashed changes
+Time Elapsed 00:00:01.48

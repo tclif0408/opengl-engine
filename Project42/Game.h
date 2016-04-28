@@ -3,9 +3,6 @@
 #include <vector>
 #include <string>
 
-#include "DrawableGameComponent.h"
-#include "Proj42.h"
-
 #include "Camera2D.h"
 #include "DrawableGameComponent.h"
 #include "GLSLProgram.h"
@@ -19,13 +16,18 @@ namespace Proj42 {
 
 	enum class GameState { PLAY, EXIT };
 
+	struct ShaderInfo {
+		std::string fragmentPath;
+		std::string vertexPath;
+		std::vector<std::string> attributes;
+	};
+
 	class Game
 	{
 	public:
-		Game(int windowWidth, int windowHeight, std::string* fragmentFilePath, std::string* vertexFilePath, std::vector<std::string*>* shaderAttributes);
+		Game(int windowWidth, int windowHeight, ShaderInfo* shaderInfo);
 		~Game();
 
-		void addGameComponent(GameComponent* component) { _components.push_back(component); }
 		void run();
 
 	protected:
@@ -36,7 +38,7 @@ namespace Proj42 {
 
 		void setCameraPos(glm::vec2 val) { _camera.setPosition(val); }
 		void setDesiredFPS(float value) { _maxFPS = value; }
-		void addGameComponent(GameComponent component) { _components.push_back(component); }
+		void addGameComponent(GameComponent* component) { _components.push_back(component); }
 
 		virtual void initialize() {}
 		virtual void update();

@@ -4,11 +4,6 @@ using namespace Proj42;
 
 int main(int argc, char** argv)
 {
-<<<<<<< Updated upstream
-	std::string vertexFilePath = "";
-	std::string fragmentFilePath = "";
-	std::vector<std::string*> attribs;
-=======
 	ShaderInfo si;
 
 	si.fragmentPath = "Shaders/colorShading.frag";
@@ -21,6 +16,5 @@ int main(int argc, char** argv)
 	PhysicsTest pt = PhysicsTest(1024, 768, &si);
 	pt.run();
 
->>>>>>> Stashed changes
-	return 0;
+	return 42;
 }
