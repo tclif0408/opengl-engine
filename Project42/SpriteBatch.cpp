@@ -19,7 +19,7 @@ void Proj42::SpriteBatch::begin(GlyphSortType sortType /* GlyphSortType::TEXTURE
 	_sortType = sortType;
 	_renderBatches.clear();
 
-	for (int i = 0; i < _glyphs.size(); i++)	// delete remaining glyphs to avoid memory leaks!
+	for (unsigned int i = 0; i < _glyphs.size(); i++)	// delete remaining glyphs to avoid memory leaks!
 		delete _glyphs[i];
 
 	_glyphs.clear();
@@ -61,7 +61,7 @@ void Proj42::SpriteBatch::renderBatch()
 {
 	glBindVertexArray(_vaoID);	// set up some opengl state, binds the vertex attribute pointers and VOB
 
-	for (int i = 0; i < _renderBatches.size(); i++)
+	for (unsigned int i = 0; i < _renderBatches.size(); i++)
 	{
 		glBindTexture(GL_TEXTURE_2D, _renderBatches[i].texture);
 		glDrawArrays(GL_TRIANGLES, _renderBatches[i].offset, _renderBatches[i].numVertices);
@@ -123,7 +123,7 @@ void Proj42::SpriteBatch::createRenderBatches()
 	offset += 6;
 
 	// add the rest of the glyphs
-	for (int cg = 1; cg < _glyphs.size(); cg++)
+	for (unsigned int cg = 1; cg < _glyphs.size(); cg++)
 	{
 		// check if this glyph can be part of the current batch
 		// make a new batch if it isn't, increment numVertices if it is

@@ -11,6 +11,7 @@ namespace Proj42 {
 		_screenWidth = windowWidth;
 		_screenHeight = windowHeight;
 		_maxFPS = 30.0f;
+		_shaderInfo = shaderInfo;
 
 		_camera.init(_screenWidth, _screenHeight);
 	}

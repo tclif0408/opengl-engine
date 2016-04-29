@@ -14,7 +14,7 @@ public:
 private:
 	void initialize();
 	void update();
-	void draw();
+	//void draw();
 
 	std::vector<PhysicsObject> _physicsObjects;
 

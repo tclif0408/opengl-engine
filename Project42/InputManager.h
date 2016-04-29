@@ -4,6 +4,8 @@
 
 #include <glm/glm.hpp>
 
+#include "Keys.h"
+
 namespace Proj42 {
 	class InputManager
 	{

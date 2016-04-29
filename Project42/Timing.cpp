@@ -38,11 +38,10 @@ void Proj42::FPSLimiter::calculateFPS()
 	static float prevTicks = SDL_GetTicks();
 	static int currentFrame = 0;
 
-	float currentTicks;
-	float frameTimeAverage = 0;
+	float currentTicks, frameTimeAverage = 0.0f;
 	int count;
 
-	currentTicks = SDL_GetTicks();
+	currentTicks = (float)SDL_GetTicks();
 	_frameTime = currentTicks - prevTicks;
 	frameTimes[currentFrame % NUM_SAMPLES] = _frameTime;
 	prevTicks = currentTicks;

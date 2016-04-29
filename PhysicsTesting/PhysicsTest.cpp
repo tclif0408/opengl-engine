@@ -32,8 +32,3 @@ void PhysicsTest::update()
 				resolveCollision(&_physicsObjects[i].getBoundingBox(), &_physicsObjects[j].getBoundingBox());
 			}
 }
-
-void PhysicsTest::draw()
-{
-	Game::draw();
-}
